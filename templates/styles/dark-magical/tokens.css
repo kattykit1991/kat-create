@@ -1,0 +1,69 @@
+/* ========================================
+   KATCODED · DARK MAGICAL · v0.1
+   Design Tokens
+   ======================================== */
+
+:root {
+  /* COLORS · CORE */
+  --kat-bg: #21152b;
+  --kat-surface: #2b1b38;
+
+  --kat-primary: #d8c6a3;
+  --kat-magic: #5c3d70;
+
+  --kat-text: #f4edf8;
+  --kat-text-muted: #b9a9c1;
+
+  /* COLORS · SEMANTIC */
+  --kat-danger: #a83f4b;
+  --kat-success: #5a8f6b;
+
+  /* TYPOGRAPHY · FONT FAMILIES */
+  --kat-font-display: "EB Garamond", Georgia, serif;
+  --kat-font-body: "Noto Sans", Arial, sans-serif;
+
+  /* TYPOGRAPHY · SIZES */
+  --kat-text-h1: 2.75rem;
+  --kat-text-h2: 1.75rem;
+  --kat-text-h3: 1.25rem;
+  --kat-text-base: 1rem;
+  --kat-text-accent: 1.1rem;
+  --kat-text-small: 0.875rem;
+
+  /* TYPOGRAPHY · LINE HEIGHTS */
+  --kat-leading-h1: 1.2;
+  --kat-leading-h2: 1.3;
+  --kat-leading-h3: 1.4;
+  --kat-leading-ui: 1.4;
+  --kat-leading-base: 1.6;
+  --kat-leading-small: 1.5;
+
+  /* SPACING */
+  --kat-space-2xs: 0.25rem;
+  --kat-space-xs: 0.5rem;
+  --kat-space-sm: 0.75rem;
+  --kat-space-md: 1rem;
+  --kat-space-lg: 1.5rem;
+  --kat-space-xl: 2rem;
+  --kat-space-2xl: 3rem;
+
+  /* RADIUS */
+  --kat-radius-md: 0.75rem;
+  --kat-radius-lg: 1.5rem;
+  --kat-radius-pill: 9999px;
+
+  /* BORDERS */
+  --kat-border-width: 1px;
+  --kat-border-color: var(--kat-magic);
+
+  /* SHADOWS & GLOWS */
+  --kat-shadow-surface: 0 0.25rem 1rem rgb(0 0 0 / 50%);
+  --kat-glow-magic: 0 0 1rem
+    color-mix(in srgb, var(--kat-magic) 65%, transparent);
+  --kat-glow-primary: 0 0 1rem
+    color-mix(in srgb, var(--kat-primary) 55%, transparent);
+
+  /* MOTION */
+  --kat-lift-hover: -2px;
+  --kat-duration-ui: 180ms;
+}
