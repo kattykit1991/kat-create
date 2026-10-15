@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import { createInterface } from "node:readline/promises";
 import { mkdir, cp, rm } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
