@@ -15,6 +15,7 @@ The current prototype can:
 - Ask for a project name.
 - Create a new project directory.
 - Copy my KAT DEV TOOLS templates into the project.
+- Include `PROJECT_REQUIREMENTS.md` to track requirements, implementation progress, and independent reviews.
 - Place `AGENTS.md` and `README.md` in the project root.
 - Handle basic file-system errors.
 - Find its templates even when launched from another directory.
@@ -64,6 +65,31 @@ The CLI will ask for a project name and create a new folder in your current work
 
 The generated project includes my personal KAT DEV TOOLS documentation templates.
 
+### 📋 Project Requirements
+
+Every newly generated project includes:
+
+`dev-tools/PROJECT_REQUIREMENTS.md`
+
+This document tracks what a project needs to fulfill and whether each requirement has actually been verified.
+
+It keeps two important states separate:
+
+- **Implementation** – Has the requirement been implemented?
+- **Review** – Has the implementation actually been checked?
+
+A completed implementation does not automatically mean a passed review.
+
+The Requirements document complements the existing tools:
+
+- `PROJECT_REQUIREMENTS.md` – What must the project fulfill?
+- `PROJECT_BUILD_GUIDE.md` – How do I build it?
+- `PROJECT_STATE.md` – Where am I right now?
+
+The Requirements template is currently an **early pilot**, developed through practical use in my Artelier project.
+
+Its structure may evolve as I continue testing it.
+
 > ⚠️ This is an early prototype. It currently creates a basic project structure, not a complete React, Python, or fullstack application.
 
 ---
@@ -79,6 +105,7 @@ The generated project includes my personal KAT DEV TOOLS documentation templates
 - Interactive project name input.
 - Automatic project folder creation.
 - KAT DEV TOOLS template integration.
+- Automatic inclusion of `PROJECT_REQUIREMENTS.md` in every new project.
 - Basic error handling.
 - Template paths independent of the working directory.
 
