@@ -1,5 +1,7 @@
 # 📋 PROJECT REQUIREMENTS
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > Was muss DAS DING™ erfüllen – und was wurde tatsächlich überprüft?
 > Anforderungen, Implementierung und Review bleiben getrennt.
 
@@ -26,7 +28,7 @@ Falls eine Aufgabenstellung bereits Requirements oder IDs (z. B. FR001) vorgibt:
 | [ID] | [Anforderung beschreiben] | Open | Not Reviewed |
 
 <!--
-VORGESCHLAGENE STATUSWERTE – im Pilot noch nicht endgültig standardisiert:
+STATUSWERTE IN V1.0.0 – einfache Ausgangswerte; weitere Zwischenstände bei echtem Bedarf klar benennen:
 
 Implementation:
 - Open: Noch nicht begonnen.
@@ -57,6 +59,7 @@ BEISPIELSTRUKTUR (kein echtes Review-Ergebnis):
 - Korrekturen / Follow-up: [Was ist noch offen?]
 
 Falls die Prüfung Probleme findet, den Review nicht als Passed markieren.
+Falls konkrete Testfälle in PROJECT_TESTING.md den Review belegen, bei Bedarf ihre IDs angeben – keine Testergebnisse doppelt dokumentieren.
 Nach einer Korrektur erneut prüfen, bevor Passed eingetragen wird.
 -->
 
@@ -74,4 +77,4 @@ Nach einer Korrektur erneut prüfen, bevor Passed eingetragen wird.
 ---
 
 > 👻 Part of **KAT · DEV TOOLS** · katcoded.de  
-> Diese Vorlage wird als Pilot erprobt und darf nach praktischer Nutzung weiterentwickelt werden.
+> See `DEV_TOOLS_README.md` for information about this toolkit.

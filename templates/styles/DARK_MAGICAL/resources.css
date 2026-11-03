@@ -1,0 +1,15 @@
+/* Optional resource helpers. No normal UI background is changed. */
+.kat-ui .ready-bg-warm{background:var(--kat-card-gradient)}
+.kat-ui .ready-bg-folder{background:var(--kat-folder-gradient)}
+.dm-bg-plum-texture-subtle{background-color:var(--kat-bg);background-image:url("backgrounds/plum-texture-subtle.svg");background-size:32px 32px;}
+.dm-bg-plum-texture-standard{background-color:var(--kat-bg);background-image:url("backgrounds/plum-texture-standard.svg");background-size:32px 32px;}
+.dm-bg-plum-texture-decorative{background-color:var(--kat-bg);background-image:url("backgrounds/plum-texture-decorative.svg");background-size:32px 32px;}
+.dm-bg-star-field-subtle{background-color:var(--kat-bg);background-image:url("backgrounds/star-field-subtle.svg");background-size:120px 120px;}
+.dm-bg-star-field-standard{background-color:var(--kat-bg);background-image:url("backgrounds/star-field-standard.svg");background-size:120px 120px;}
+.dm-bg-star-field-decorative{background-color:var(--kat-bg);background-image:url("backgrounds/star-field-decorative.svg");background-size:120px 120px;}
+.dm-bg-book-code-pattern-subtle{background-color:var(--kat-bg);background-image:url("backgrounds/book-code-pattern-subtle.svg");background-size:120px 120px;}
+.dm-bg-book-code-pattern-standard{background-color:var(--kat-bg);background-image:url("backgrounds/book-code-pattern-standard.svg");background-size:120px 120px;}
+.dm-bg-book-code-pattern-decorative{background-color:var(--kat-bg);background-image:url("backgrounds/book-code-pattern-decorative.svg");background-size:120px 120px;}
+.dm-bg-warm-edge-light-subtle{background-color:var(--kat-bg);background-image:url("backgrounds/warm-edge-light-subtle.svg");background-size:cover;}
+.dm-bg-warm-edge-light-standard{background-color:var(--kat-bg);background-image:url("backgrounds/warm-edge-light-standard.svg");background-size:cover;}
+.dm-bg-warm-edge-light-decorative{background-color:var(--kat-bg);background-image:url("backgrounds/warm-edge-light-decorative.svg");background-size:cover;}

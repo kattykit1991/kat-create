@@ -1,5 +1,7 @@
 # 🌱 PROJECT START
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > Der kurze Startpunkt für DAS DING™.
 > Hier wird geklärt, was ich bauen will, warum ich es bauen will und was für das aktuelle Ziel erstmal draußen bleibt.
 

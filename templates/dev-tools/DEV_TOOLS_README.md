@@ -1,7 +1,10 @@
 # 👻 KAT · DEV TOOLS
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > A personal developer workflow toolkit built around the way Kat actually learns, builds, debugs, and ships software.  
-> **katcoded.de**
+> **katcoded.de**  
+> **Toolkit-Version:** `v1.0.0` · **Vorlagenstand:** 03.11.2026
 
 ---
 
@@ -11,9 +14,11 @@
 
 **KAT · DEV TOOLS** ist ein persönliches Developer-Workflow-Toolkit für Kat.
 
-Die Tools wurden nicht als allgemeines Produktivitäts-System entworfen, sondern aus Kats tatsächlicher Arbeitsweise entwickelt und anhand echter Softwareprojekte getestet und verbessert.
+Die Tools wurden nicht als allgemeines Produktivitäts-System entworfen, sondern aus Kats tatsächlicher Arbeitsweise entwickelt. Sie werden in echten Softwareprojekten erprobt und bei Bedarf verbessert.
 
 Das Toolkit soll beim Bauen unterstützen, ohne selbst zum Projekt zu werden.
+
+**v1.0.0** ist der erste gemeinsame, aufeinander abgestimmte Vorlagenstand. Die Versionsnummer bescheinigt weder, dass jedes Tool bereits umfassend erprobt ist, noch dass ein damit erstelltes Projekt fertig ist.
 
 **Grundidee:**
 
@@ -40,6 +45,14 @@ Klärt:
 
 ---
 
+### 📋 `PROJECT_REQUIREMENTS.md`
+
+Die Anforderungen des Projekts – getrennt von der konkreten Bauanleitung.
+
+Für jede Anforderung werden **Implementierungsstand** und **Review-Ergebnis** getrennt gepflegt.
+
+`Done` bedeutet nicht automatisch `Passed`. Nur tatsächlich überprüfte Anforderungen erhalten ein positives Review.
+
 ### 🗺️ `PROJECT_BUILD_GUIDE.md`
 
 Der persönliche Bauplan vom aktuellen Ziel zum funktionierenden Projekt.
@@ -53,6 +66,14 @@ Zu jedem Schritt können direkt die generischen Syntax- oder Technikmuster stehe
 Der Build Guide ist eine Route, kein Vertrag. Wenn das echte Bauen einen besseren oder fehlenden Schritt zeigt, darf der Plan mitwachsen.
 
 ---
+
+### 🧪 `PROJECT_TESTING.md`
+
+Die Testwerkstatt für geplante Testfälle und tatsächlich beobachtete Ergebnisse.
+
+Tests dürfen schon bei der Planung entstehen. Bei einem ausdrücklichen Testauftrag kann Codex Tests ausführen, Ergebnisse dokumentieren und zusätzliche Fälle ergänzen.
+
+**Geplant ≠ getestet ≠ bestanden.** Testen ist noch kein Auftrag zum Reparieren.
 
 ### 🎮 `PROJECT_STATE.md`
 
@@ -127,16 +148,18 @@ Wenn Kat es explizit delegiert, darf ein Agent CSS, Tailwind, Layout und andere 
 
 ## 🚀 Verwendung in einem neuen Projekt
 
-Den `DEV_TOOLS`-Ordner in das neue Projekt kopieren.
+Die benötigten Vorlagen aus dem `DEV_TOOLS`-Ordner ins Projekt übernehmen. Nicht jedes Projekt braucht sofort jede Datei.
 
-Danach:
+Dabei:
 
 1. `PROJECT_START.md` ausfüllen.
-2. `PROJECT_BUILD_GUIDE.md` für den geplanten Build vorbereiten.
-3. `PROJECT_STATE.md` als Savegame verwenden.
-4. `NOTES.md` nur benutzen, wenn Brainblerps einen Parkplatz brauchen.
-5. `PROJECT_README.md` für das Projekt anpassen und nach dem Setup zur finalen `README.md` machen.
-6. `AGENTS.md` normalerweise unverändert lassen.
+2. Anforderungen bei Bedarf in `PROJECT_REQUIREMENTS.md` festhalten; Umsetzungs- und Review-Status getrennt führen.
+3. `PROJECT_BUILD_GUIDE.md` für den geplanten Build vorbereiten.
+4. Testfälle in `PROJECT_TESTING.md` sammeln, wenn Tests geplant oder durchgeführt werden.
+5. `PROJECT_STATE.md` als Savegame verwenden.
+6. `NOTES.md` nur benutzen, wenn Brainblerps einen Parkplatz brauchen.
+7. `PROJECT_README.md` für das Projekt anpassen und nach dem Setup zur finalen `README.md` machen.
+8. `AGENTS.md` normalerweise unverändert lassen und dort ablegen, wo der eingesetzte Coding Agent die Projektanweisungen liest (bei Codex üblicherweise im Projektroot).
 
 Nicht jedes Tool muss ständig gepflegt werden.
 
@@ -162,7 +185,7 @@ Wenn etwas funktioniert und kein konkretes Problem existiert:
 
 **KAT · DEV TOOLS** ist Teil von **KAT · DEV SYSTEM**.
 
-Das Toolkit wurde für Kats persönliche Arbeits-, Lern- und Entwicklungsweise entwickelt und durch praktische Nutzung in echten Softwareprojekten iterativ verfeinert.
+Das Toolkit wurde für Kats persönliche Arbeits-, Lern- und Entwicklungsweise entwickelt. Der gemeinsame Vorlagenstand wird bei der Nutzung in echten Projekten weiter erprobt und bei Bedarf verfeinert.
 
 **katcoded.de**
 
@@ -174,9 +197,11 @@ Das Toolkit wurde für Kats persönliche Arbeits-, Lern- und Entwicklungsweise e
 
 **KAT · DEV TOOLS** is a personal developer workflow toolkit built for Kat.
 
-It was not designed as a generic productivity system. The tools were derived from the way Kat actually learns, builds, debugs, and works on software, then tested and refined through real software projects.
+It was not designed as a generic productivity system. The tools were derived from the way Kat actually learns, builds, debugs, and works on software. They are tested in real projects and refined as needed.
 
 The toolkit exists to support building without becoming a project of its own.
+
+**v1.0.0** is the first coordinated baseline of all templates. The version does not mean every tool has been extensively tested or that a project built with it is complete.
 
 **Core idea:**
 
@@ -203,6 +228,18 @@ It clarifies:
 
 ---
 
+---
+
+### 📋 `PROJECT_REQUIREMENTS.md`
+
+The project's requirements, kept separate from the step-by-step build plan.
+
+Each requirement has independent **implementation** and **review** statuses.
+
+`Done` does not automatically mean `Passed`. Reviews must be based on actual checks.
+
+---
+
 ### 🗺️ `PROJECT_BUILD_GUIDE.md`
 
 The personal build route from the current goal to a working project.
@@ -214,6 +251,18 @@ Each step can include the generic syntax or technical patterns needed for that s
 **First the task. Then the tool.**
 
 The Build Guide is a route, not a contract. If the real build reveals a missing or better step, the guide may evolve with it.
+
+---
+
+---
+
+### 🧪 `PROJECT_TESTING.md`
+
+The test workspace for planned cases and actual observed results.
+
+Tests may be added during planning. When explicitly asked, Codex may run tests, document results, and propose additional cases.
+
+**Planned ≠ tested ≠ passed.** Running tests does not authorize fixing application code.
 
 ---
 
@@ -290,16 +339,18 @@ When Kat asks for it, an agent may directly implement CSS, Tailwind, layout poli
 
 ## 🚀 Using the toolkit in a new project
 
-Copy the `DEV_TOOLS` folder into the new project.
+Bring the templates you need from the `DEV_TOOLS` folder into the project. Not every project needs every file from day one.
 
 Then:
 
 1. Fill in `PROJECT_START.md`.
-2. Prepare `PROJECT_BUILD_GUIDE.md` for the planned build.
-3. Use `PROJECT_STATE.md` as the project savegame.
-4. Use `NOTES.md` only when Brainblerps need somewhere to live.
-5. Adapt `PROJECT_README.md` and turn it into the final `README.md` after project setup.
-6. Normally leave `AGENTS.md` unchanged.
+2. Record requirements in `PROJECT_REQUIREMENTS.md` as needed; keep implementation and review separate.
+3. Prepare `PROJECT_BUILD_GUIDE.md` for the planned build.
+4. Add planned or completed tests to `PROJECT_TESTING.md` when useful.
+5. Use `PROJECT_STATE.md` as the project savegame.
+6. Use `NOTES.md` only when Brainblerps need somewhere to live.
+7. Adapt `PROJECT_README.md` and turn it into the final `README.md` after project setup.
+8. Normally keep `AGENTS.md` unchanged and place it where your coding agent reads project instructions (typically the project root for Codex).
 
 Not every tool needs constant maintenance.
 
@@ -325,6 +376,6 @@ If something works and there is no concrete problem:
 
 **KAT · DEV TOOLS** is part of **KAT · DEV SYSTEM**.
 
-The toolkit was developed around Kat's personal way of working, learning, and building software, then iteratively refined through practical use in real software projects.
+The toolkit was developed around Kat's personal way of working, learning, and building software. This coordinated template baseline continues to be tested and refined through use in real projects.
 
 **katcoded.de**

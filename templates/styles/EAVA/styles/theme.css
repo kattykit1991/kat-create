@@ -1,0 +1,100 @@
+/* EAVA v0.1 · kleine Grundregeln und Designprimitiven, keine Bibliothek. */
+@font-face {
+  font-family: "Cinzel";
+  src: url("../fonts/Cinzel.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IM Fell English";
+  src: url("../fonts/IMFellEnglish.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("../fonts/Literata.ttf") format("truetype");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("../fonts/NotoSans.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  margin: 0;
+  background: var(--kat-bg);
+  color: var(--kat-text);
+  font-family: var(--kat-font-body);
+  font-size: var(--eava-size-body);
+  line-height: var(--eava-leading-body);
+}
+:where(h1, h2, h3) { font-family: var(--eava-font-display); font-weight: 500; }
+h1 { font-size: var(--eava-size-hero); line-height: var(--eava-leading-display); letter-spacing: -0.035em; }
+h2 { font-size: var(--eava-size-h2); line-height: var(--eava-leading-h2); }
+h3 { font-size: var(--eava-size-h3); line-height: var(--eava-leading-h3); }
+h4 { font: 600 var(--eava-size-h4)/var(--eava-leading-ui) var(--eava-font-ui); }
+:where(nav, button, input, select, textarea, label), .eava-ui { font-family: var(--eava-font-ui); }
+:where(button, input, select, textarea) { font-size: var(--eava-size-body); line-height: var(--eava-leading-ui); }
+:where(h1, h2, h3, h4, p, a) { overflow-wrap: anywhere; }
+a { color: var(--eava-link); text-underline-offset: 0.25em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: var(--eava-focus-width) solid var(--kat-focus); outline-offset: var(--eava-focus-offset); }
+.eava-container { width: min(90%, var(--eava-container)); margin-inline: auto; }
+.eava-reading { max-inline-size: var(--eava-reading-width); line-height: var(--eava-leading-reading); }
+.eava-manuscript { font: 400 var(--eava-size-manuscript)/var(--eava-leading-ui) var(--eava-font-manuscript); }
+.eava-caption { font: 400 var(--eava-size-caption)/1.7 var(--eava-font-ui); color: var(--kat-text-muted); }
+.eava-surface {
+  background: var(--kat-surface);
+  color: var(--kat-text);
+  border: var(--eava-border-width) solid var(--eava-bronze);
+  border-radius: var(--eava-radius-surface);
+  padding: var(--eava-space-5);
+  box-shadow: var(--eava-shadow);
+}
+.eava-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eava-space-3);
+  padding: var(--eava-space-2) 1.1rem;
+  border: var(--eava-border-width) solid var(--kat-text);
+  border-radius: var(--eava-radius-control);
+  background: transparent;
+  color: var(--kat-text);
+  font: 600 var(--eava-size-body)/var(--eava-leading-ui) var(--eava-font-ui);
+  text-decoration: none;
+  cursor: pointer;
+  transition-duration: var(--eava-motion-duration);
+}
+.eava-button--primary { background: var(--eava-button-bg); border-color: var(--eava-button-bg); color: var(--eava-button-text); }
+@media (hover: hover) {
+  .eava-button:not(:disabled):not([aria-disabled="true"]):hover { filter: brightness(var(--eava-hover-brightness)); }
+}
+/* Active/disabled sind sparsame Foundation-Arbeitszustände ohne neue Farben. */
+.eava-button:not(:disabled):not([aria-disabled="true"]):active { text-decoration: underline; text-decoration-thickness: 2px; }
+.eava-button:disabled, .eava-button[aria-disabled="true"] {
+  background: var(--kat-surface); color: var(--kat-text-muted); border-color: var(--kat-border-color); cursor: not-allowed;
+}
+.eava-field { display: grid; gap: var(--eava-space-1); }
+.eava-field > label { font-size: 0.8rem; font-weight: 500; }
+.eava-field :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  inline-size: 100%; min-inline-size: 0; padding: var(--eava-space-2);
+  border: var(--eava-border-width) solid var(--kat-border-color);
+  border-radius: var(--eava-radius-control);
+  background: var(--eava-input-bg); color: var(--kat-text);
+}
+.eava-field textarea { resize: vertical; }
+.eava-field ::placeholder { color: var(--kat-text-muted); opacity: 1; }
+.eava-ornament { color: var(--eava-bronze); }
+@media (max-width: 760px) { .eava-surface { padding: var(--eava-space-4); } }
+@media (prefers-reduced-motion: reduce) {
+  :root { --eava-motion-duration: 0s; }
+  .eava-button { transition: none; }
+}

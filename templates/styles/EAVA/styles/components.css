@@ -1,0 +1,13 @@
+/* Pack additions. Colors use the existing Foundation roles. */
+[hidden]{display:none!important}
+.eava-notice,.eava-details{padding:1rem;border:1px solid var(--kat-border-color);border-radius:var(--eava-radius-control);background:var(--kat-surface);color:var(--kat-text)}
+.eava-details summary{cursor:pointer;font-weight:700;min-block-size:2rem}
+.eava-dialog{width:min(32rem,calc(100% - 2rem));max-block-size:85vh;overflow:auto;padding:1.5rem;border:1px solid var(--kat-border-color);border-radius:var(--eava-radius-control);background:var(--kat-surface);color:var(--kat-text)}
+.eava-dialog::backdrop{background:var(--kat-text);opacity:.35}
+.eava-table-wrap{overflow:auto}
+.eava-table{width:100%;border-collapse:collapse;text-align:start}
+.eava-table th,.eava-table td{padding:.75rem;border-bottom:1px solid var(--kat-border-color);text-align:start}
+.eava-field :where(input,select,textarea){font:inherit;min-block-size:44px}
+.eava-button{min-block-size:44px}
+
+.eava-button{max-inline-size:100%;overflow-wrap:anywhere}.eava-manuscript{margin-inline:0;overflow-wrap:anywhere}

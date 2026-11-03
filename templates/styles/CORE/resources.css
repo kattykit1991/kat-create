@@ -1,0 +1,5 @@
+/* Optional resource helpers. No normal UI background is changed. */
+.kat-ui .ready-bg-warm{background:var(--kat-card-gradient)}
+.kat-ui .ready-bg-folder{background:var(--kat-folder-gradient)}
+.kat-ui .ready-pattern-core-112-dot-tile{background-image:url("backgrounds/core-112-dot-tile.svg");background-repeat:repeat}
+.kat-ui .ready-pattern-core-113-circuit-tile{background-image:url("backgrounds/core-113-circuit-tile.svg");background-repeat:repeat}

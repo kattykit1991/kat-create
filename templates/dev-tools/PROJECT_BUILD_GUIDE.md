@@ -1,5 +1,7 @@
 # 🗺️ PROJECT BUILD GUIDE
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > Meine Bauanleitung vom aktuellen Ziel zum funktionierenden DING™.
 > Nicht in Stein gemeißelt: Wenn sich beim Bauen ein besserer Weg zeigt, darf der Bauplan mitwachsen.
 

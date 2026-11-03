@@ -1,5 +1,7 @@
 # 🎮 PROJECT STATE
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > Mein Savegame für dieses Projekt.
 > Wenn ich nach einer Pause zurückkomme, soll ich hier schnell sehen:
 > **Wo bin ich? Was funktioniert schon? Was ist offen? Was kommt als Nächstes?**

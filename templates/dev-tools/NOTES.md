@@ -1,5 +1,7 @@
 # 📝 NOTES
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > Projektbezogene Brainblerps, die ich mir merken will, aber gerade nirgendwo sinnvoller hingehören.
 > Grobe Kategorien helfen Future-Kat beim Wiederfinden – mehr Bürokratie brauchen wir hier nicht. 👻
 

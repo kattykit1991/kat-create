@@ -1,0 +1,17 @@
+/* EAVA · gemeinsame technische Grundregeln */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:where(img, video) {
+  max-inline-size: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}

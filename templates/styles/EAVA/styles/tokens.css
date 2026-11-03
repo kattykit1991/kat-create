@@ -1,0 +1,99 @@
+/* EAVA Style Foundation v0.1 · 22.10.2026
+   Werte nach der freigegebenen Living-Parchment-Demo.
+   Nur Tokens und Moduswahl; Schriftdateien lädt theme.css. */
+:root {
+  --kat-font-body: "Literata", Georgia, serif;
+  --eava-font-ui: "Noto Sans", system-ui, sans-serif;
+  --eava-font-display: "Cinzel", Georgia, serif;
+  --eava-font-manuscript: "IM Fell English", Georgia, serif;
+
+  --kat-focus: var(--kat-text);
+  --kat-border-color: var(--kat-text-muted);
+  --eava-bronze: #A48B65;
+  --eava-link: var(--kat-text);
+  --eava-red-text: var(--eava-red);
+  --eava-button-bg: var(--kat-primary);
+  --eava-input-bg: var(--kat-bg);
+
+  --eava-size-body: 1rem;
+  --eava-size-hero: clamp(2rem, 4.5vw, 3.65rem);
+  --eava-size-h2: clamp(1.5rem, 2.6vw, 2.15rem);
+  --eava-size-h3: 1.3rem;
+  --eava-size-h4: 1rem;
+  --eava-size-manuscript: 1.5rem;
+  --eava-size-caption: 0.72rem;
+  --eava-leading-body: 1.8;
+  --eava-leading-reading: 1.95;
+  --eava-leading-ui: 1.5;
+  --eava-leading-display: 1.25;
+  --eava-leading-h2: 1.35;
+  --eava-leading-h3: 1.4;
+
+  /* Häufige Demo-Abstände, keine universelle CORE-Skala. */
+  --eava-space-1: 0.5rem;
+  --eava-space-2: 0.75rem;
+  --eava-space-3: 1rem;
+  --eava-space-4: 1.4rem;
+  --eava-space-5: 1.8rem;
+  --eava-space-6: 2.5rem;
+  --eava-space-7: 3rem;
+  --eava-space-8: 4.5rem;
+  --eava-container: 1160px;
+  --eava-reading-width: 65ch; /* Arbeitswert für eigenständige Artikel. */
+  --eava-radius-control: 3px;
+  --eava-radius-surface: 0;
+  --eava-border-width: 1px;
+  --eava-focus-width: 3px;
+  --eava-focus-offset: 4px;
+  --eava-shadow: none;
+  --eava-hover-brightness: 0.94;
+  --eava-motion-duration: 0s;
+}
+
+:root {
+  color-scheme: light;
+  --kat-bg: #F3E8CE;
+  --kat-surface: #FAF4E6;
+  --kat-text: #352B24;
+  --kat-text-muted: #716052;
+  --kat-primary: #006BCB;
+  --eava-red: #B5262F;
+  --eava-green: #008747;
+  --eava-button-text: #FAF4E6;
+  --eava-green-text: var(--kat-text);
+  --eava-blue-text: var(--kat-text);
+}
+
+/* Kein Attribut = System. Ein expliziter Modus hat Vorrang. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+  color-scheme: dark;
+  --kat-bg: #211C1A;
+  --kat-surface: #322923;
+  --kat-text: #F0DEBD;
+  --kat-text-muted: #C6AD8D;
+  --kat-primary: #65B8FF;
+  --eava-red: #F08B8B;
+  --eava-green: #62D994;
+  --eava-button-text: #211C1A;
+  --eava-green-text: var(--eava-green);
+  --eava-blue-text: var(--kat-primary);
+}
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --kat-bg: #211C1A;
+  --kat-surface: #322923;
+  --kat-text: #F0DEBD;
+  --kat-text-muted: #C6AD8D;
+  --kat-primary: #65B8FF;
+  --eava-red: #F08B8B;
+  --eava-green: #62D994;
+  --eava-button-text: #211C1A;
+  --eava-green-text: var(--eava-green);
+  --eava-blue-text: var(--kat-primary);
+}
+
+/* data-theme="light" verwendet die Light-Werte aus :root.
+   Kein zweiter Selektor, keine JS-Farbzuweisungen, kein light-dark()-Bedarf. */

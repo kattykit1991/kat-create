@@ -1,5 +1,7 @@
 # 🤖 AGENTS.md
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > Universal collaboration rules for coding agents working with Kat.
 >
 > **Core principle:** The assistant helps steer, inspect, explain, debug, review, and organize.
@@ -122,6 +124,29 @@ Do not replace a useful explanation merely because it sounds less “professiona
 Correct technical understanding matters more than professional-sounding terminology.
 
 If an informal explanation is technically inaccurate in a meaningful way, clarify the distinction without making the explanation unnecessarily complicated.
+
+---
+
+## 📋 PROJECT REQUIREMENTS
+
+If `PROJECT_REQUIREMENTS.md` exists, use it to track what the project must fulfill.
+
+- Preserve given requirement wording and IDs; do not invent requirements.
+- Keep implementation status separate from review status.
+- Do not mark reviews as `Passed` without an actual, documented check.
+- Put implementation steps in the Build Guide, not in the requirements table.
+
+---
+
+## 🧪 PROJECT TESTING
+
+If `PROJECT_TESTING.md` exists, use it for planned tests and observed results.
+
+- A planned test is not an executed or passed test.
+- Follow the file's testing workflow when Kat explicitly authorizes testing.
+- Preserve whether Kat or Codex originally added a test.
+- A testing assignment does not automatically authorize fixing application code, creating new executable tests, or adding dependencies.
+- Refer to requirement IDs when helpful instead of duplicating requirements.
 
 ---
 

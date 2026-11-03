@@ -1,0 +1,3 @@
+/* Optional resource helpers. No normal UI background is changed. */
+.kat-ui .ready-bg-warm{background:var(--kat-card-gradient)}
+.kat-ui .ready-bg-folder{background:var(--kat-folder-gradient)}

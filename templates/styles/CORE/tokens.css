@@ -1,0 +1,38 @@
+/* KATCODED UI 0.1 · copied as a complete independent variant. */
+@font-face{font-family:"Kat Nunito";src:url("fonts/NunitoSans.ttf") format("truetype");font-weight:200 1000;font-display:swap}
+@font-face{font-family:"Kat Quicksand";src:url("fonts/Quicksand.ttf") format("truetype");font-weight:300 700;font-display:swap}
+.kat-ui[data-kat-theme="core"]{
+  --kat-radius-control: 12px;
+  --kat-radius-card: 24px;
+  --kat-radius-pill: 99px;
+  --kat-control-height: 46px;
+  --kat-focus-offset: 4px;
+  --kat-font-round: "Kat Quicksand", system-ui, sans-serif;
+  --kat-bg: #FFF9F0;
+  --kat-surface: #FFFDF9;
+  --kat-text: #51404B;
+  --kat-text-muted: #78636E;
+  --kat-primary: #F2C5D4;
+  --kat-soft: #F7E5EB;
+  --kat-fresh: #E7DEF3;
+  --kat-strong: #865367;
+  --kat-border: #A17F8D;
+  --kat-button-hover: #EBBACD;
+  --kat-font-body: "Kat Nunito", system-ui, sans-serif;
+  --kat-font-display: "Kat Quicksand", system-ui, sans-serif;
+  --kat-focus-width: 3px;
+  --kat-duration: 140ms;
+  --kat-hover-lift: 0px;
+  --kat-color-scheme: light;
+  --kat-disabled-bg: #F7E5EB;
+  --kat-card-title: 22px;
+  --kat-shadow-card: 0 12px 35px rgb(90 61 75 / .05);
+  --kat-folder-border: transparent;
+  --kat-active-text: #51404B;
+  --kat-focus: #865367;
+  --kat-button-primary-bg: #F2C5D4;
+  --kat-button-primary-text: #51404B;
+  --kat-art-border: color-mix(in srgb,var(--kat-border) 35%,transparent);
+  --kat-folder-gradient: linear-gradient(130deg,var(--kat-soft),var(--kat-bg));
+  --kat-card-gradient: linear-gradient(130deg,var(--kat-soft),var(--kat-fresh));
+}

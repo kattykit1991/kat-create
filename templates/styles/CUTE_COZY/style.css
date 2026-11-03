@@ -1,0 +1,4 @@
+/* Complete local entry, load once. */
+@import url("./tokens.css");
+@import url("./ui.css");
+@import url("./resources.css");

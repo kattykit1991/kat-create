@@ -1,5 +1,7 @@
 # [PROJECT NAME]
 
+<!-- KAT · DEV TOOLS | Vorlagen-Release: v1.0.0 | 2026-11-03 -->
+
 > [Kurze Beschreibung in 1–2 Sätzen: Was ist das Projekt und was kann man damit machen?]
 
 ---
