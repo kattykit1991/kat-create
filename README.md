@@ -1,135 +1,129 @@
-# 👻 kat-create
+# 👻 KAT CREATE
 
-> A tiny CLI project generator built with TypeScript, one hand, and potatoes. 🥔
+Ein persönlicher Projektgenerator mit TypeScript, KAT DEV TOOLS und optionalen Style-Paketen. Gleichzeitig ein Portfolio- und Lernprojekt: verständliche Funktionen statt eines Plugin-Frameworks.
 
----
+Der erste Prototyp entstand mit einer Hand und Kartoffeln in der anderen. 🥔 Der bisherige React/Vite-Ablauf und alle vorhandenen Templates bleiben die Grundlage dieser Erweiterung.
 
-## ✨ About
+## Benutzung
 
-**kat-create** is a personal command-line tool for setting up new coding projects with my own development templates.
+Voraussetzung für den Generator: Node.js ab 22.12 und die manuell installierten Repository-Abhängigkeiten. Getestet wurde mit Node.js 24.19.0.
 
-Instead of manually creating the same folders and copying documentation files every time, I wanted a little helper to do the repetitive work for me.
-
-The current prototype can:
-
-- Ask for a project name.
-- Create a new project directory.
-- Copy my KAT DEV TOOLS templates into the project.
-- Include `PROJECT_REQUIREMENTS.md` to track requirements, implementation progress, and independent reviews.
-- Place `AGENTS.md` and `README.md` in the project root.
-- Handle basic file-system errors.
-- Find its templates even when launched from another directory.
-
-This is my first self-built CLI tool and an ongoing learning project.
-
-And yes, the first working version was developed with one hand while eating potatoes. 🥔
-
----
-
-## 🛠️ Tech
-
-- **TypeScript** – Main programming language.
-- **Node.js** – Runtime environment and file-system operations.
-- **tsx** – Runs TypeScript files directly during development.
-- **npm** – Dependency management.
-- **Git & GitHub** – Version control and project hosting.
-
-No frontend framework or UI is required. This little ghost lives in the terminal. 👻
-
----
-
-## 🚀 Run locally
-
-### Requirements
-
-- Node.js
-- npm
-
-### Getting started
-
-```bash
-# Clone the repository
-git clone git@github.com:kattykit1991/kat-create.git
-
-# Enter the project directory
-cd kat-create
-
-# Install dependencies
+```sh
+# Einmalig selbst ausführen, falls die Abhängigkeiten fehlen:
 npm install
 
-# Start the CLI
-npx tsx src/index.ts
+# Im Repository:
+npm start
 ```
 
-The CLI will ask for a project name and create a new folder in your current working directory.
+Die CLI fragt Kategorie, Sprache, Framework, Projekttyp und Namen ab. Danach folgen die optionalen DEV TOOLS, ein unabhängiges Style-Paket und bei Web-Apps eine persönliche Starteransicht. Eine Zusammenfassung zeigt das Ziel und gegebenenfalls den externen Generatorbefehl. Erst nach Bestätigung wird erzeugt; Enter allein bricht ab. Strg+C beendet die Auswahl.
 
-The generated project includes my personal KAT DEV TOOLS documentation templates.
+Projektname: maximal 64 Zeichen, Groß-/Kleinbuchstaben, Ziffern und einzelne Bindestriche oder Unterstriche, beginnend mit einem Buchstaben. `test_blerps_00`, `TEST_BLERPS_00` und `testblerpsi_00` bleiben als Ordnernamen exakt erhalten. Windows-Gerätenamen sind unabhängig von der Schreibweise gesperrt; Leerzeichen werden abgelehnt. Das Ziel liegt im aktuellen Arbeitsverzeichnis und darf noch nicht existieren – auch kein leerer Ordner oder Symlink.
 
-### 📋 Project Requirements
+Interne npm-Paketnamen werden kleingeschrieben und Unterstriche durch Bindestriche ersetzt, z. B. `TEST_BLERPS_00` → `test-blerps-00`. Die CLI zeigt den abweichenden Paketnamen vor der Erzeugung an. Da Next.js auch den Ordnernamen als Paketnamen validiert, erzeugen die Web-Generatoren bei Bedarf intern in einem kompatibel benannten Unterordner. Dessen Inhalt wird in den gewünschten Projektordner übernommen; dieser selbst wird nicht umbenannt. Python-Projektnamen dürfen Großbuchstaben und Unterstriche enthalten und bleiben in den Metadaten erhalten. .NET erhält einen geeigneten internen Projektnamen; Bindestriche werden wie bisher entfernt, Unterstriche und Großbuchstaben bleiben erhalten.
 
-Every newly generated project includes:
+Für einen lokal verlinkten Befehl selbst ausführen:
 
-`dev-tools/PROJECT_REQUIREMENTS.md`
+```sh
+npm run build
+npm link
+# Danach in deinem gewünschten Elternordner:
+kat-create
+```
 
-This document tracks what a project needs to fulfill and whether each requirement has actually been verified.
+Es wird nichts automatisch installiert, wiederhergestellt, gestartet, committet oder gepusht. Externe npm-Generatoren können nach deiner Bestätigung heruntergeladen werden und selbst nach Cache-Installation fragen. Das ist vom anschließenden `npm install` **im erzeugten Projekt** getrennt. Lokale Node-/Python-/Dokumentations-Starter benötigen zum Erzeugen keinen Download. Die .NET-Varianten benötigen ein vorhandenes SDK.
 
-It keeps two important states separate:
+## Unterstützte Projekttypen
 
-- **Implementation** – Has the requirement been implemented?
-- **Review** – Has the implementation actually been checked?
+| Kategorie | Sprache | Framework / Projekttyp | Erzeugung |
+| --- | --- | --- | --- |
+| Frontend | JavaScript, TypeScript | React, Vue, Vanilla | Offizielles create-vite |
+| Fullstack | JavaScript, TypeScript | Next.js App Router mit `/api/health` | Offizielles create-next-app |
+| Backend | JavaScript, TypeScript | Node.js HTTP JSON-API, `/api/health` | Kleiner lokaler Starter ohne Web-Dependency |
+| Backend | Python | FastAPI oder Flask, `/api/health` | Lokaler Starter mit pyproject.toml |
+| Backend | C# | ASP.NET Core Minimal API, `/api/health` | dotnet new webapi |
+| CLI | JavaScript, TypeScript | Node.js Konsolenprogramm | Lokaler Starter |
+| CLI | Python | argparse-Konsolenprogramm | Lokaler Starter |
+| CLI | C# | .NET Konsole | dotnet new console |
+| Bibliothek | JavaScript, TypeScript | Node.js ES-Modul | Lokaler Starter |
+| Bibliothek | Python | Paket `starter` unter src/ | Lokaler Starter |
+| Bibliothek | C# | .NET Klassenbibliothek | dotnet new classlib |
+| Dokumentation | Keine | Projektordner mit DEV TOOLS | Vorhandene Templates |
 
-A completed implementation does not automatically mean a passed review.
+Das sind 22 auswählbare Kombinationen. Next.js liefert eine zusammenhängende Fullstack-Anwendung; ein getrenntes Frontend-/Backend-Monorepo gehört noch nicht zum Umfang. Für Python existiert kein einheitlicher offizieller Generator für diese vier Varianten; hier werden bewusst kleine lokale Startdateien erzeugt.
 
-The Requirements document complements the existing tools:
+Vite erhält `--no-immediate`, Next.js `--skip-install --disable-git` und .NET `--no-restore`. Framework-Versionen der externen npm-Generatoren folgen `latest`: neue Upstream-Strukturen müssen erneut geprüft werden. Unbekannte Dateistrukturen führen zu einem Fehler statt zu einem als erfolgreich gemeldeten leeren Projekt.
 
-- `PROJECT_REQUIREMENTS.md` – What must the project fulfill?
-- `PROJECT_BUILD_GUIDE.md` – How do I build it?
-- `PROJECT_STATE.md` – Where am I right now?
+## DEV TOOLS und Styles
 
-The Requirements template is currently an **early pilot**, developed through practical use in my Artelier project.
+Die Dateien unter `templates/` werden nicht verändert. Bei gewählten DEV TOOLS werden `AGENTS.md` und `PROJECT_README.md` wie bisher zu `AGENTS.md` und `README.md` im Ziel-Root. Die übrigen Vorlagen liegen unter `dev-tools/`, einschließlich `PROJECT_REQUIREMENTS.md` mit getrennten Implementierungs- und Reviewzuständen. Bereits erzeugte Generator-READMEs/AGENTS werden als `GENERATOR_README.md` beziehungsweise `GENERATOR_AGENTS.md` erhalten.
 
-Its structure may evolve as I continue testing it.
+CORE, CUTE_COZY, DARK_MAGICAL und EAVA sind vier eigenständige, optionale Browser-Pakete. Es wird genau das gewählte Paket vollständig kopiert; keine Vererbung und kein automatisches Hinzufügen von CORE. Der hier enthaltene CORE ist laut seiner Paket-README der visuelle Soft-&-Creamy-Style, nicht die frühere farblose technische Basis.
 
-> ⚠️ This is an early prototype. It currently creates a basic project structure, not a complete React, Python, or fullstack application.
+Web-Apps erhalten das Paket unter `public/styles/<PAKET>/`, andere Projekttypen unter `styles/<PAKET>/` als zusätzliche Ressource. Web-Apps binden das Stylesheet ein und setzen passende Containerklassen. Optionale Dialog-/Theme-Skripte des Pakets werden bei Bedarf nach dessen README eingebunden. Der persönliche Starter zeigt den Projektnamen und einen Gruß an Kat; ohne diese Option bleibt eine minimale Projektüberschrift. Es werden keine neuen Logos oder Illustrationen erfunden.
 
----
+Vite-Demos, Zähler, Demo-Styles und bekannte Logos werden in der frisch erzeugten Anwendung bereinigt. Next.js erhält eine kleine Seite, ein Layout ohne externe Demo-Schriften und einen Health-Endpunkt. Die .NET-WeatherForecast-Demo wird ebenfalls durch einen Health-Endpunkt ersetzt. Die originalen Dateien in `templates/` bleiben dabei unangetastet.
 
-## 📍 Status
+## Nach dem Erzeugen
 
-**Current version:** v0.1.0 – Early prototype  
-**Project type:** Personal learning project  
-**Development status:** In active development
+`KAT_CREATE.md` enthält die zum Projekttyp passenden manuellen Installations-, Build- und Startbefehle. Die CLI zeigt sie ebenfalls an. Beispiele:
 
-### ✅ Implemented
+- Vite / Next.js: `npm install`, danach `npm run dev`.
+- Node.js mit TypeScript: `npm install`, `npm run build`, bei Apps `npm start`.
+- Python: virtuelle Umgebung selbst erstellen/aktivieren, `python -m pip install -e .`, danach den dokumentierten Framework-Befehl ausführen. Python-Starter setzen Python 3.10+ voraus.
+- .NET: `dotnet restore`, danach `dotnet run --no-restore` oder bei Bibliotheken `dotnet build --no-restore`.
 
-- Interactive project name input.
-- Automatic project folder creation.
-- KAT DEV TOOLS template integration.
-- Automatic inclusion of `PROJECT_REQUIREMENTS.md` in every new project.
-- Basic error handling.
-- Template paths independent of the working directory.
+`kat-create.json` speichert die gewählten Optionen mit Formatversion 1. Es werden keine geheimen Zugangsdaten abgefragt. Backend-Starter besitzen einen kleinen funktionierenden Endpunkt, aber keine Authentifizierung, Datenbank oder Deploymentkonfiguration.
 
-### 🔮 Planned
+Bei Fehlern endet die CLI mit Exitcode 1. Ein bereits erzeugter Teilstand bleibt zur Prüfung erhalten; es wird kein Zielordner rekursiv gelöscht. Für einen neuen Versuch einen freien Namen verwenden oder den Teilstand selbst prüfen und entfernen.
 
-- Project type selection (frontend, backend, fullstack, Python).
-- Vite integration for frontend projects.
-- Automatic setup of project dependencies.
-- Selection of custom design styles.
-- More helpful input validation and error messages.
+## Code und Erweiterung
 
----
+| Datei | Verantwortung |
+| --- | --- |
+| `src/index.ts` | Terminaldialog, Auswahl, Zusammenfassung und Bestätigung |
+| `src/catalog.ts` | Typen, verfügbare Kombinationen und Optionsvalidierung |
+| `src/generator.ts` | Externe Befehle, Ablauf, Templatekopien und Folgeanleitung |
+| `src/scaffolds.ts` | Kleine lokale Node.js-/Python-Starter und Dateischreiben |
+| `src/presentation.ts` | Bereinigung frisch erzeugter Web-Demos und Starteransichten |
+| `tests/generator.test.ts` | Erzeugung, Kopiertreue, Befehle und Fehlerfälle |
 
-## 👩‍💻 Developer
+Neue Kombinationen werden im Katalog ergänzt. Ein tatsächlich neuer Erzeugungsweg benötigt zusätzlich eine überschaubare Funktion im Generator bzw. Scaffold-Modul und passende Tests. Es gibt keine leeren Adapter oder angeblich fertigen Platzhalter.
 
-Built with 💜 by **Kat**.
+Für spätere Aufrufer ist `createProject()` unabhängig vom Terminal verfügbar. KATUARY selbst wird nicht implementiert. Nach `npm run build` ist beispielsweise möglich:
 
-I'm currently learning Software Engineering at WBS CODING SCHOOL.
+```js
+import { createProject } from './dist/generator.js';
 
-This project is part of my journey from learning to code to building my own development tools.
+await createProject({
+  name: 'mein-projekt',
+  typeId: 'node-cli-javascript',
+  devTools: true,
+  style: null,
+  starter: false,
+}, '/absoluter/elternordner');
+```
 
-> 🥔 Fun fact: The first working prototype was coded with one hand because the other was busy eating potatoes.
+Der Aufrufer verantwortet die Zustimmung zu externen Generatoren. Der optionale dritte Parameter ist eine einfache Prozessfunktion für Tests; die normale Verwendung braucht ihn nicht. `projectTypes` aus `catalog.ts` liefert gültige IDs und Auswahlmetadaten.
 
----
+## Prüfungen und Grenzen
 
-> 👻 Part of **KAT · DEV TOOLS** · katcoded.de  
-> Development templates are located in `templates/dev-tools/`.
+```sh
+npm run typecheck
+npm run build
+npm test
+# Optional mit vorhandenem .NET SDK, ohne Restore/Build/Start:
+KAT_CREATE_TEST_DOTNET=1 npm test
+```
+
+Die Tests installieren keine Pakete und starten keine erzeugten Anwendungen. Die .NET-Tests isolieren CLI-Home und NuGet-Verzeichnis in einem temporären Ordner. Ohne die Umgebungsvariable werden die zwölf .NET-Fälle (je Projekttyp vier Namen) ausdrücklich übersprungen. Weitere 32 Integrationstests lassen sich mit `KAT_CREATE_TEST_VITE=/absoluter/pfad/create-vite/index.js` und `KAT_CREATE_TEST_NEXT=/absoluter/pfad/create-next-app/dist/index.js` aktivieren. Die Pfade müssen auf bereits vorhandene Generatoren zeigen; die Tests installieren sie nicht. Die Generator-Einstellungen werden nur im jeweiligen Testprozess in ein temporäres Home-Verzeichnis umgeleitet.
+
+Prüfstand vom 13.11.2026: **143 Tests erfolgreich**, einschließlich 32 echter Web-Erzeugungen mit bereits vorhandenem create-vite 9.3.3 / create-next-app 16.4.3 und zwölf echter .NET-Erzeugungen mit SDK 10.0.404. Die drei bevorzugten Namensbeispiele werden für alle 22 Projekttypen geprüft; Web- und .NET-Varianten zusätzlich mit den vorhandenen echten Generatoren. Lokale Node-/Python-Starter wurden tatsächlich erzeugt, Node-Dateien auf Syntax geprüft, generiertes Node-TypeScript mit dem vorhandenen Compiler geprüft und Python-Quellen/TOML geparst. Alle vier Stylekopien und die DEV TOOLS wurden auf Bytegleichheit geprüft. Typecheck und Build des Generators waren erfolgreich.
+
+**Vite/Next.js wurden sowohl mit synthetischen Ausgaben als auch mit vorhandenen echten Generatoren geprüft.** Das belegt die Erzeugung, Übergabe und Bereinigung aller angebotenen Web-Varianten, aber keinen neuen Download oder vollständigen Framework-Build. Ohne optionale Werkzeuge/Pfade besteht der Standardlauf aus 99 erfolgreichen Tests und 44 ausdrücklich übersprungenen Integrationstests. Es gab keine Paketinstallation, keinen Restore und keinen App-Start als Teil der Prüfung. Browser-/Layoutprüfung, Windows-Ausführung sowie die Installation/Builds der erzeugten Apps bleiben offen. Die CLI wurde zusätzlich im echten Terminal geprüft.
+
+Weitere Grenzen: Next.js-Stylesheet-URLs verwenden den Rootpfad; bei einem später konfigurierten `basePath` muss das Layout angepasst werden. Die Starteransicht nutzt CSS und keine interaktiven Pack-Komponenten. Python-Paket-/Framework-Installationen und .NET-Kompilation sind nicht durch den Erzeugungstest abgedeckt. Die vollständigen Grafikpakete sind teilweise groß (CORE ca. 128 MB, CUTE_COZY ca. 227 MB, DARK_MAGICAL ca. 117 MB).
+
+Befehlsreferenzen: [Vite-Generator](https://github.com/vitejs/vite/tree/main/packages/create-vite), [create-next-app](https://nextjs.org/docs/app/api-reference/cli/create-next-app), [dotnet new](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new).
+
+Gebaut von Kat · Software-Engineering-Lernprojekt · KAT DEV TOOLS 👻🥔

@@ -2,5 +2,7 @@ node_modules/
 TEST_BLERP*/
 TEST_BLERPS*/
 TEST-BLERP*/
+test_blerps_*/
+testblerpsi_*/
 dist/
 .DS_Store
