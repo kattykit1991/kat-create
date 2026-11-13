@@ -1,13 +1,16 @@
 {
   "name": "kat-create",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Personal project generator with optional KAT DEV TOOLS and style packages",
+  "main": "./dist/generator.js",
   "bin": {
-    "kat-create": "./src/index.ts"
+    "kat-create": "./dist/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --import tsx src/index.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts"
   },
   "keywords": [],
   "type": "module",
