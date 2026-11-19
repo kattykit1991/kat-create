@@ -30,7 +30,9 @@ export function generatorCommand(type: ProjectType, name: string): Command | nul
     ] };
   }
   if (type.generator === 'dotnet') {
-    const projectName = name.replace(/-([a-z0-9])/gi, (_, letter: string) => letter.toUpperCase());
+    // C#-Bezeichner dürfen nicht mit einer Ziffer beginnen; der Zielordner bleibt unverändert.
+    const projectName = name.replace(/-([a-z0-9])/gi, (_, letter: string) => letter.toUpperCase())
+      .replace(/^(?=[0-9])/, 'Project_');
     return { command: 'dotnet', args: [
       'new', type.template, '--name', projectName, '--output', '.', '--no-restore',
       ...(type.template === 'webapi' ? ['--no-openapi'] : []),

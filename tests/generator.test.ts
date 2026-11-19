@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { projectTypes, styles, toPackageName, validateOptions } from '../src/catalog.js';
+import { projectTypes, styles, supportsStyles, toPackageName, validateOptions } from '../src/catalog.js';
 import type { ProjectOptions, ProjectType } from '../src/catalog.js';
 import { createProject, generatorCommand, runCommand } from '../src/generator.js';
 import { writeFiles } from '../src/scaffolds.js';
@@ -39,9 +39,26 @@ test('Katalog: eindeutige IDs und gültige Optionen für alle Varianten', () => 
   for (const type of projectTypes) assert.equal(validateOptions(options(type)), type);
 });
 
+for (const type of projectTypes) {
+  test(`Style-Pakete nur für Web-UIs: ${type.id}`, async () => temporary(async directory => {
+    const webUI = type.category === 'Frontend' || type.category === 'Fullstack';
+    assert.equal(supportsStyles(type), webUI);
+    for (const style of styles) {
+      if (webUI) {
+        assert.equal(validateOptions(options(type, { style })), type);
+      } else {
+        await assert.rejects(createProject(options(type, { style }), directory, async () => {
+          assert.fail('Für ungültige Style-Auswahl darf kein Generator starten');
+        }), /nur für Projekte mit Web-UI/);
+        assert.deepEqual(await readdir(directory), []);
+      }
+    }
+  }));
+}
+
 test('ungültige Namen und Optionen werden vor Dateischreibzugriffen abgelehnt', async () => {
   await temporary(async directory => {
-    for (const name of ['', '.', '..', '../escape', '/tmp/escape', 'has space', 'bad;echo', '$(pwd)', 'con', 'CON', 'aux', 'AUX', 'com1', 'COM1', 'foo--bar', ' foo', 'foo ', 'a'.repeat(65)]) {
+    for (const name of ['', '.', '..', '../escape', '/tmp/escape', 'has space', 'bad;echo', '$(pwd)', 'con', 'CON', 'aux', 'AUX', 'com1', 'COM1', 'foo--bar', '_foo', '-foo', 'foo_', 'foo-', 'foo__bar', 'foo-_bar', ' foo', 'foo ', 'a'.repeat(65)]) {
       await assert.rejects(createProject(options(nodeType, { name }), directory), /Projektname/);
     }
     await assert.rejects(createProject(options(nodeType, { typeId: 'unknown' }), directory), /Unbekannter/);
@@ -51,7 +68,16 @@ test('ungültige Namen und Optionen werden vor Dateischreibzugriffen abgelehnt',
   });
 });
 
-const preferredNames = ['test_blerps_00', 'TEST_BLERPS_00', 'testblerpsi_00'];
+const preferredNames = ['test_blerps_00', 'TEST_BLERPS_00', 'testblerpsi_00', '07_rpg_blerps', '07_rpg-blerps', '01_CSharp_Exercises'];
+const dotnetNames: Record<string, string> = {
+  'test-project': 'testProject',
+  test_blerps_00: 'test_blerps_00',
+  TEST_BLERPS_00: 'TEST_BLERPS_00',
+  testblerpsi_00: 'testblerpsi_00',
+  '07_rpg_blerps': 'Project_07_rpg_blerps',
+  '07_rpg-blerps': 'Project_07_rpgBlerps',
+  '01_CSharp_Exercises': 'Project_01_CSharp_Exercises',
+};
 test('Namenskompatibilität für npm und .NET ohne Änderung der Eingabe', () => {
   assert.equal(toPackageName('node_modules'), 'node-modules');
   const type = projectTypes.find(type => type.generator === 'dotnet')!;
@@ -83,7 +109,7 @@ for (const name of preferredNames) {
           await fakeWebGenerator(join(cwd, generatorDirectory), type, packageName);
         } else {
           const projectName = command.args[command.args.indexOf('--name') + 1]!;
-          assert.equal(projectName, name);
+          assert.equal(projectName, dotnetNames[name]);
           await writeFiles(cwd, { [`${projectName}.csproj`]: '<Project />', 'Program.cs': '// SDK output' });
         }
       });
@@ -243,8 +269,11 @@ for (const type of projectTypes.filter(type => type.generator === 'dotnet')) {
         assert.equal(result.status, 0, result.stdout + result.stderr);
       });
       assert.equal(target, join(directory, name));
-      assert.ok((await readdir(target)).includes(`${name.replace(/-([a-z0-9])/gi, (_, letter: string) => letter.toUpperCase())}.csproj`));
+      assert.ok((await readdir(target)).includes(`${dotnetNames[name]}.csproj`));
       assert.ok(!(await readdir(target)).includes('obj'), 'Kein Restore-Artefakt');
+      if (type.template === 'classlib') {
+        assert.ok((await readFile(join(target, 'Class1.cs'), 'utf8')).includes(`namespace ${dotnetNames[name]}`));
+      }
       if (type.template === 'webapi') {
         const program = await readFile(join(target, 'Program.cs'), 'utf8');
         assert.match(program, /api\/health/);
@@ -262,6 +291,52 @@ test('CLI-Hilfe und fehlendes Terminal erzeugen keine Projekte', () => {
   assert.equal(noTerminal.status, 1);
   assert.match(noTerminal.stderr, /benötigt ein Terminal/);
 });
+
+const cliCases = [
+  { label: 'React', selections: ['1', '1', '1', '1'], webUI: true },
+  { label: 'Vue', selections: ['1', '1', '2', '1'], webUI: true },
+  { label: 'Vanilla', selections: ['1', '1', '3', '1'], webUI: true },
+  { label: 'Next.js', selections: ['2', '1', '1', '1'], webUI: true },
+  { label: 'Node.js API', selections: ['3', '1', '1', '1'], webUI: false },
+  { label: 'Python API', selections: ['3', '3', '1', '1'], webUI: false },
+  { label: 'C# Konsole', selections: ['4', '4', '1', '1'], webUI: false },
+  { label: 'Python CLI', selections: ['4', '3', '1', '1'], webUI: false },
+  { label: 'C# Klassenbibliothek', selections: ['5', '4', '1', '1'], webUI: false },
+  { label: 'Dokumentation', selections: ['6', '1', '1', '1'], webUI: false },
+];
+for (const scenario of cliCases) {
+  test(`CLI-Style-Auswahl mit simulierter Terminaleingabe: ${scenario.label}`, async () => temporary(async directory => {
+    const answers = [
+      ...scenario.selections, '07_rpg_blerps',
+      ...(scenario.label === 'Dokumentation' ? [] : ['n']),
+      ...(scenario.webUI ? ['1', 'n'] : []), 'n',
+    ];
+    const preload = join(directory, 'terminal-input.cjs');
+    // Nur die Eingabe simulieren; der echte CLI-Dialog läuft bis zum Abbruch vor der Erzeugung.
+    await writeFile(preload, `
+const answers = ${JSON.stringify(answers)};
+Object.defineProperty(process.stdin, 'isTTY', { value: true });
+require('node:readline/promises').createInterface = () => ({
+  on() {},
+  async question() {
+    if (!answers.length) throw new Error('Unerwartete zusätzliche CLI-Frage');
+    return answers.shift();
+  },
+  close() {
+    if (answers.length) throw new Error('Erwartete CLI-Fragen fehlen');
+  },
+});
+require('node:module').syncBuiltinESMExports();
+`);
+    const result = spawnSync(process.execPath, ['--require', preload, '--import', 'tsx', 'src/index.ts'], {
+      encoding: 'utf8', timeout: 5000,
+    });
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.equal(result.stdout.includes('Optionales unabhängiges Style-Paket'), scenario.webUI);
+    assert.match(result.stdout, /07_rpg_blerps/);
+    assert.match(result.stdout, /Abgebrochen/);
+  }));
+}
 
 // Optional vorhandene Generatoren nutzen, niemals per npm nachinstallieren.
 for (const type of projectTypes.filter(type => ['vite', 'next'].includes(type.generator))) {

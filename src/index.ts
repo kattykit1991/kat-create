@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
-import { projectTypes, styles, toPackageName, validateOptions } from './catalog.js';
+import { projectTypes, styles, supportsStyles, toPackageName, validateOptions } from './catalog.js';
 import type { ProjectOptions } from './catalog.js';
 import { createProject, generatorCommand, nextSteps } from './generator.js';
 
@@ -54,10 +54,11 @@ async function main(): Promise<void> {
       } catch (error) { console.log((error as Error).message); }
     }
     const devTools = category === 'Dokumentation' || await yesNo('KAT DEV TOOLS hinzufügen?', true);
-    const selectedStyle = await choose('Optionales unabhängiges Style-Paket', ['Keines', ...styles] as const);
+    const selectedStyle = supportsStyles(type)
+      ? await choose('Optionales unabhängiges Style-Paket', ['Keines', ...styles] as const)
+      : 'Keines';
     const style = selectedStyle === 'Keines' ? null : selectedStyle;
-    if (style && !['vite', 'next'].includes(type.generator)) console.log('Das Browser-Stylepaket wird als Ressource kopiert; es gestaltet keine API oder Konsole.');
-    const starter = ['vite', 'next'].includes(type.generator) && await yesNo('Kleine persönliche Starteransicht hinzufügen?', true);
+    const starter = supportsStyles(type) && await yesNo('Kleine persönliche Starteransicht hinzufügen?', true);
     options = { name, typeId: type.id, devTools, style, starter };
     console.log(`\nZiel: ${process.cwd()}/${name}\n${category} · ${language} · ${framework} · ${label}\nDEV TOOLS: ${devTools ? 'ja' : 'nein'} · Style: ${style ?? 'keiner'} · Starter: ${starter ? 'ja' : 'nein'}`);
     if (['vite', 'next', 'node'].includes(type.generator) && toPackageName(name) !== name) {
