@@ -53,15 +53,20 @@ export function toPackageName(name: string): string {
   return name.toLowerCase().replace(/_/g, '-');
 }
 
+export function supportsStyles(type: ProjectType): boolean {
+  return type.generator === 'vite' || type.generator === 'next';
+}
+
 export function validateOptions(options: ProjectOptions): ProjectType {
   // Ein einzelner portabler Ordnername verhindert Traversal und Shell-Sonderzeichen.
-  if (!/^[a-z][a-z0-9]*(?:[-_][a-z0-9]+)*$/i.test(options.name) || options.name.length > 64 || /^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i.test(options.name)) {
-    throw new Error('Projektname: 1–64 Zeichen, Groß-/Kleinbuchstaben, Ziffern und einzelne Bindestriche oder Unterstriche; mit Buchstabe beginnen.');
+  if (!/^[a-z0-9]+(?:[-_][a-z0-9]+)*$/i.test(options.name) || options.name.length > 64 || /^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i.test(options.name)) {
+    throw new Error('Projektname: 1–64 Zeichen, Groß-/Kleinbuchstaben, Ziffern und einzelne Bindestriche oder Unterstriche; mit Buchstabe oder Ziffer beginnen.');
   }
   const type = getProjectType(options.typeId);
   if (typeof options.devTools !== 'boolean' || typeof options.starter !== 'boolean' || (options.style !== null && !styles.includes(options.style))) {
     throw new Error('Ungültige Projektoptionen.');
   }
-  if (options.starter && !['vite', 'next'].includes(type.generator)) throw new Error('Eine Starteransicht ist nur für Web-Apps verfügbar.');
+  if (options.style !== null && !supportsStyles(type)) throw new Error('Style-Pakete sind nur für Projekte mit Web-UI verfügbar.');
+  if (options.starter && !supportsStyles(type)) throw new Error('Eine Starteransicht ist nur für Web-Apps verfügbar.');
   return type;
 }
